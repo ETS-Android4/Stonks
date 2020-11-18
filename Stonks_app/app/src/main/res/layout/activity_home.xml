@@ -10,23 +10,12 @@
     tools:context=".HomeActivity">
 
     <SearchView
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="#D3CCCC">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView" />
-    </SearchView>
+        android:id="@+id/searchView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:queryHint="Search Here"
+        android:iconifiedByDefault="false"
+        android:layout_alignParentTop="true"
+        android:background="#D3CCCC"/>
 
 </LinearLayout>
