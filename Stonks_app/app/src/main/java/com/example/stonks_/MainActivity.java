@@ -7,10 +7,17 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.view.KeyEvent;
+import android.widget.SearchView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+
+
+
 public class MainActivity extends AppCompatActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         getSupportActionBar().hide();
+
+
 
         Thread thread = new Thread() {
 
@@ -36,7 +45,10 @@ public class MainActivity extends AppCompatActivity {
         };
         thread.start();
 
+
     }
+
+
 }
 
 
