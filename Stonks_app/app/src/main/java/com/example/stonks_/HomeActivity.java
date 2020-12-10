@@ -11,6 +11,7 @@ import android.widget.Toast;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.Request;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
@@ -39,7 +40,7 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 RequestQueue queue = Volley.newRequestQueue(HomeActivity.this);
-                String url = "http://192.168.0.8:5000";
+                String url = "http://192.168.0.9:5000";
 
                 String json = "{\"query\":\""+ query +"\"}";
 
@@ -56,7 +57,23 @@ public class HomeActivity extends AppCompatActivity {
                     }, new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Log.i("stonks",error.toString());
+                            Log.i("stonkse",error.toString());
+                        }
+                    });
+                    jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
+                        @Override
+                        public int getCurrentTimeout() {
+                            return 30000;
+                        }
+
+                        @Override
+                        public int getCurrentRetryCount() {
+                            return 30000;
+                        }
+
+                        @Override
+                        public void retry(VolleyError error) throws VolleyError {
+
                         }
                     });
                     queue.add(jsonObjectRequest);
