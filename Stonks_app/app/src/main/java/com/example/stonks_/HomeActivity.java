@@ -39,49 +39,9 @@ public class HomeActivity extends AppCompatActivity {
         search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                RequestQueue queue = Volley.newRequestQueue(HomeActivity.this);
-                String url = "http://192.168.0.9:5000";
-
-                String json = "{\"query\":\""+ query +"\"}";
-
-                try {
-
-                    JSONObject obj = new JSONObject(json);
-
-                    Log.i("stonks", obj.toString());
-                    JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(Request.Method.POST, url, obj, new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.i("stonks",response.toString());
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.i("stonkse",error.toString());
-                        }
-                    });
-                    jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-                        @Override
-                        public int getCurrentTimeout() {
-                            return 30000;
-                        }
-
-                        @Override
-                        public int getCurrentRetryCount() {
-                            return 30000;
-                        }
-
-                        @Override
-                        public void retry(VolleyError error) throws VolleyError {
-
-                        }
-                    });
-                    queue.add(jsonObjectRequest);
-
-                } catch (Throwable tx) {
-                    Log.e("stonks", "Could not parse malformed JSON: \"" + json + "\"");
-                }
-
+                Intent intent = new Intent(HomeActivity.this,ResultActivity.class);
+                intent.putExtra("query",query);
+                startActivity(intent);
                 return true;
             }
 

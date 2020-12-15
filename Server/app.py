@@ -69,10 +69,12 @@ def hell():
     closing_price=closing_price.tolist()
     print("type  clossing price is",type(closing_price))
     print("type  data is",type(data1))
-    result = closing_price + data1 #adding predicted price with the past 60 days price 
-    result= result[::-1] #making it in the ascending order of dates (ie result is reversed)
+    result = data1 + closing_price #adding predicted price with the past 60 days price 
+    #result= result[::-1] #making it in the ascending order of dates (ie result is reversed)
+    lastval = data1[len(data1) - 1]
     result = { 'values' : result,
-                'pred' : closing_price }
+                'pred' : closing_price,
+                'lastval' : lastval }
     jresult = json.dumps(result)
     print(jresult)
     print(type(jresult))
