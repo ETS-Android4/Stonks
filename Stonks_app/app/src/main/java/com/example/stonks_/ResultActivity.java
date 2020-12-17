@@ -48,6 +48,16 @@ public class ResultActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).hide();
 
+
+        Button back1 = findViewById(R.id.back1);
+        back1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ResultActivity.this ,HomeActivity.class);
+                startActivity(intent);
+            }
+        });
+
         RequestQueue queue = Volley.newRequestQueue(ResultActivity.this);
         String url = "http://192.168.0.9:5000";
 
@@ -112,7 +122,7 @@ public class ResultActivity extends AppCompatActivity {
                 public void onErrorResponse(VolleyError error) {
                     Log.i("stonkse",error.toString());
                     setContentView(R.layout.error);
-                    EditText error1;
+                    TextView error1;
                     Button b1;
                     b1 = findViewById(R.id.button);
                     error1 = findViewById(R.id.error1);
