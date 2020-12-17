@@ -1,6 +1,7 @@
 package com.example.stonks_;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -21,11 +22,16 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -35,6 +41,7 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result);
+
 
         ProgressBar spinner;
         spinner = (ProgressBar)findViewById(R.id.progressBar1);
@@ -74,6 +81,25 @@ public class ResultActivity extends AppCompatActivity {
                         Log.i("stonks",jval3.toString());
                         Integer in = jval3.getInt(0);
                         curr.setText(in.toString());
+
+                        JSONArray jval4 = response.getJSONArray("values");
+                        Log.i("stonks",jval4.toString());
+
+                        GraphView graph =findViewById(R.id.graph);
+                        graph.setVisibility(View.VISIBLE);
+
+                        LineGraphSeries<DataPoint> series;
+                        series = new LineGraphSeries<>();
+                        int day=1;
+                        for (int k = 0 ; k < jval4.length(); k++)
+                        {
+                            JSONArray jval5 = jval4.getJSONArray(k);
+                            int stock = jval5.getInt(0);
+                            series.appendData(new DataPoint(day,stock),true,65);
+                            day+=1;
+                        }
+                        graph.setBackgroundColor(Color.BLACK);
+                        graph.addSeries(series);
 
 
                     } catch (JSONException e) {
