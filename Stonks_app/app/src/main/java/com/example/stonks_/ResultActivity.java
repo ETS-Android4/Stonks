@@ -158,7 +158,7 @@ public class ResultActivity extends AppCompatActivity {
             Log.e("stonks", "Could not parse malformed JSON: \"" + json + "\"");
 
             setContentView(R.layout.error);
-            EditText error1;
+            TextView error1;
             Button b1;
             b1 = findViewById(R.id.button);
             error1 = findViewById(R.id.error1);
