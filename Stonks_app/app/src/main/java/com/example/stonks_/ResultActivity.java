@@ -120,56 +120,37 @@ public class ResultActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Log.i("stonkse",error.toString());
-                    setContentView(R.layout.error);
-                    TextView error1;
-                    Button b1;
-                    b1 = findViewById(R.id.button);
-                    error1 = findViewById(R.id.error1);
-                    error1.setText("No Results Found");
-                    b1.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Intent intent = new Intent(ResultActivity.this,HomeActivity.class);
-                            startActivity(intent);
-                        }
-                    });
+                    Intent intent2 = new Intent(ResultActivity.this,ErrorActivity.class);
+                    intent2.putExtra("error", "No Result found");
+                    startActivity(intent2);
                 }
             });
             jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
                 @Override
                 public int getCurrentTimeout() {
-                    return 30000;
+                    return 15000;
                 }
 
                 @Override
                 public int getCurrentRetryCount() {
-                    return 30000;
+                    return 1;
                 }
 
                 @Override
                 public void retry(VolleyError error) throws VolleyError {
-
+                    Intent intent = new Intent(ResultActivity.this,ErrorActivity.class);
+                    intent.putExtra("error", "Something went wrong");
+                    startActivity(intent);
+                    Log.e("stonks", error.toString());
                 }
             });
             queue.add(jsonObjectRequest);
 
         } catch (Throwable tx) {
-            Log.e("stonks", "Could not parse malformed JSON: \"" + json + "\"");
-
-            setContentView(R.layout.error);
-            TextView error1;
-            Button b1;
-            b1 = findViewById(R.id.button);
-            error1 = findViewById(R.id.error1);
-            error1.setText("Something went wrong");
-            b1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(ResultActivity.this,HomeActivity.class);
-                    startActivity(intent);
-                }
-            });
+            Intent intent1 = new Intent(ResultActivity.this,ErrorActivity.class);
+            intent1.putExtra("error", "Something went wrong");
+            startActivity(intent1);
         }
     }
+
 }

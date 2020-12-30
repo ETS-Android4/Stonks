@@ -25,6 +25,9 @@
         <activity android:name=".ResultActivity">
 
         </activity>
+        <activity android:name=".ErrorActivity">
+
+        </activity>
         <activity android:name=".NewsActivityDetail"
             android:theme="@style/AppTheme.NoActionBar">>
         </activity>
