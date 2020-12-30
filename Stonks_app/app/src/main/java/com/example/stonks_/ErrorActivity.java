@@ -21,8 +21,6 @@ public class ErrorActivity extends AppCompatActivity {
 
         Intent intent= getIntent();
         String error = intent.getExtras().getString("error");
-
-        Log.e("stonks", "Could not parse malformed JSON: ");
         TextView error1;
         Button b1;
         b1 = findViewById(R.id.button);

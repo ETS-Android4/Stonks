@@ -133,7 +133,7 @@ public class ResultActivity extends AppCompatActivity {
 
                 @Override
                 public int getCurrentRetryCount() {
-                    return 1;
+                    return 0;
                 }
 
                 @Override

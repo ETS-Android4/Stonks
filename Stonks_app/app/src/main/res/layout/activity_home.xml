@@ -11,7 +11,8 @@
 
     <SearchView
         android:id="@+id/searchView"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginRight="15dp"
         android:layout_height="wrap_content"
         android:queryHint="Search Here"
         android:layout_marginTop="20dp"
@@ -19,6 +20,31 @@
         android:iconifiedByDefault="false"
         android:layout_alignParentTop="true"
         android:background="#D3CCCC"/>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="70dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/stonks2"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:layout_marginTop="5dp"
+            android:textSize="20dp"
+            android:text="BSE SenSex: 47,800 pts (+150)"
+            android:layout_marginLeft="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#fff"
+            android:textSize="20dp"
+            android:text="Nifty 50: 13,800 pts (+58)"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
+    </LinearLayout>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -31,6 +57,7 @@
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

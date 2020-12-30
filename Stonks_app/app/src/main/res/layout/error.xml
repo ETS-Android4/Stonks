@@ -30,11 +30,11 @@
 
     <TextView
         android:id="@+id/error1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:layout_marginLeft="50dp"
-        android:textSize="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="30dp"
+        android:textSize="25dp"
         android:text="Sample"
         android:textColor="#FFFFFF"/>
 </LinearLayout>
