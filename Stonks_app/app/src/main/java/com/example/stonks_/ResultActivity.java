@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -41,6 +42,7 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.result);
+        TextView firmname= findViewById(R.id.firmname);
 
 
         ProgressBar spinner;
@@ -59,10 +61,12 @@ public class ResultActivity extends AppCompatActivity {
         });
 
         RequestQueue queue = Volley.newRequestQueue(ResultActivity.this);
-        String url = "http://192.168.0.9:5000";
+        String url = "http://192.168.0.8:5000";
 
         Intent intent= getIntent();
         String query = intent.getExtras().getString("query");
+
+        firmname.setText(query.toUpperCase());
 
         String json = "{\"query\":\""+ query +"\"}";
         spinner.setVisibility(View.VISIBLE);
@@ -120,30 +124,16 @@ public class ResultActivity extends AppCompatActivity {
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
+                    Log.i("stonks",error.toString());
                     Intent intent2 = new Intent(ResultActivity.this,ErrorActivity.class);
-                    intent2.putExtra("error", "No Result found");
+                    intent2.putExtra("error", "No Result found"); /* evenif the server is not runnin or if no such results were found in the database..it will show the same "no results: error...to give sepearate error text for both change the sever code in such a way that it will give a response of somekind if there is no such table in db..so u can give tht text and goto to the error intent in the above response section of code. and for server disconection error we can use this volley error*/
                     startActivity(intent2);
                 }
             });
-            jsonObjectRequest.setRetryPolicy(new RetryPolicy() {
-                @Override
-                public int getCurrentTimeout() {
-                    return 15000;
-                }
-
-                @Override
-                public int getCurrentRetryCount() {
-                    return 0;
-                }
-
-                @Override
-                public void retry(VolleyError error) throws VolleyError {
-                    Intent intent = new Intent(ResultActivity.this,ErrorActivity.class);
-                    intent.putExtra("error", "Something went wrong");
-                    startActivity(intent);
-                    Log.e("stonks", error.toString());
-                }
-            });
+            jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
+                    5000,
+                    DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                    DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
             queue.add(jsonObjectRequest);
 
         } catch (Throwable tx) {
