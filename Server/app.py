@@ -10,8 +10,8 @@ app= Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'localhost'
 app.config['MYSQL_USER'] = 'root'
-app.config['MYSQL_PASSWORD'] = 'none'
-app.config['MYSQL_DB'] = 'none'
+app.config['MYSQL_PASSWORD'] = 'green21'
+app.config['MYSQL_DB'] = 'stonks'
 
 mysql = MySQL(app)
 
@@ -28,7 +28,7 @@ def hell():
     #result = cur.fetchall()
 
 
-    #df_nse = pd.read_sql_query('SELECT * FROM %(name)s', con=my_sql_conn,params={'name':name})
+    
     df_nse = pd.read_sql_query(''' SELECT * FROM {} ORDER BY Date DESC LIMIT 60'''.format(name), con=my_sql_conn)
 
     df_nse["Date"]=pd.to_datetime(df_nse.Date,format="%Y-%m-%d")
@@ -36,6 +36,7 @@ def hell():
 
 
     data=df_nse.sort_index(ascending=True,axis=0)
+    
     new_data=pd.DataFrame(index=range(0,len(df_nse)),columns=['Date','Close'])
 
     for i in range(0,len(data)):
@@ -87,4 +88,4 @@ def hell():
 
 
 if __name__ == "__main__":
-    app.run(host="192.168.0.9", port=5000, debug=True )
+    app.run(host="192.168.0.8", port=5000, debug=True )
