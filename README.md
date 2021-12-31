@@ -1,0 +1,1 @@
+A stock predicting android application which predicts the closing price of next days closing price of a stock using the LSTM neural network. The app also have a news feed system in it. The frontend part has been made using android studio whereas the backend has been made with the help of Flask framework and a mySql database.
